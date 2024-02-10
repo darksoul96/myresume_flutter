@@ -3,11 +3,17 @@
 import 'package:flutter/material.dart';
 import 'dart:convert'; // Import this to use json.decode
 import 'package:flutter/services.dart'; // Import this to access rootBundle
+import 'package:myresume/employment_page.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'about_page.dart';
 
 
 void main() {
-  runApp(const MyWidget());
+  runApp(
+    MaterialApp(
+      home: MyWidget(),
+    )
+    );
 }
 
 class MyWidget extends StatefulWidget {
@@ -55,47 +61,52 @@ class _MyWidgetState extends State<MyWidget> {
           ],
         ),
 
-        // body: ListView.builder(
-        //   itemCount: _jsonData.length,
-        //   itemBuilder: (context, index) {
-        //     return ListTile(
-        //       title: Text(_jsonData[index]['title']),
-        //       subtitle: Text(_jsonData[index]['description']),
-        //     );
-        //   },
-        // ),
-
       body: ListView(
         children: [
           SingleChildScrollView(
             child: ListBody(
               children: [
-                SizedBox(
-                  child: Column(
-                    children: [
-                      Card(
-                        child:  ListTile(
-                          title: _jsonData.isNotEmpty ? Text(_jsonData[0]['title']) : const Text('Loading...'),
-                          //subtitle: _jsonData.isNotEmpty ? Text(_jsonData[0]['description']) : const Text('Loading...'),
-                        )
-                      ),
-                      
-                    ],
-                  )
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AboutWidget(jsonData : _jsonData)), // Navigate to the new page
+                    );
+                  },
+                  child: SizedBox(
+                    child: Column(
+                      children: [
+                        Card(
+                          child:  ListTile(
+                            title: _jsonData.isNotEmpty ? Text(_jsonData[0]['title']) : const Text('Loading...'),
+                          )
+                        ),
+                        
+                      ],
+                    )
+                  ),
                 ),
 
-                SizedBox(
-                  child: Column(
-                    children: [
-                      Card(
-                        child:  ListTile(
-                          title: _jsonData.isNotEmpty ? Text(_jsonData[1]['title']) : const Text('Loading...'),
-                          //subtitle: _jsonData.isNotEmpty ? Text(_jsonData[0]['description']) : const Text('Loading...'),
-                        )
-                      ),
-                      
-                    ],
-                  )
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => EmploymentWidget(jsonData : _jsonData)), // Navigate to the new page
+                    );
+                  },
+                  child: SizedBox(
+                    child: Column(
+                      children: [
+                        Card(
+                          child:  ListTile(
+                            title: _jsonData.isNotEmpty ? Text(_jsonData[1]['title']) : const Text('Loading...'),
+                            //subtitle: _jsonData.isNotEmpty ? Text(_jsonData[0]['description']) : const Text('Loading...'),
+                          )
+                        ),
+                        
+                      ],
+                    )
+                  ),
                 ),
 
                 SizedBox(
@@ -264,7 +275,7 @@ class _MyWidgetState extends State<MyWidget> {
                       padding: const EdgeInsets.only(top: 15,),
                       child: GestureDetector(
                         onTap: () {
-                          _launchURL();
+                          _launchURL('https://github.com/darksoul96');
                         },
                         child: RichText(
                           text: const TextSpan(
@@ -287,6 +298,34 @@ class _MyWidgetState extends State<MyWidget> {
                         ),
                       ),
                     ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15,),
+                      child: GestureDetector(
+                        onTap: () {
+                          _launchURL('https://www.linkedin.com/in/agustin-federico-ruiz-991904220');
+                        },
+                        child: RichText(
+                          text: const TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'LinkedIn',
+                              ),
+                              WidgetSpan(
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 10,),
+                                  child: Icon(
+                                    Icons.work,
+                                    color: Colors.white,
+                                    size: 16,
+                                  ),
+                                ),
+                              )
+                            ]
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               )
@@ -299,8 +338,8 @@ class _MyWidgetState extends State<MyWidget> {
     );
   }
 
-  _launchURL() async {
-   final Uri url = Uri.parse('https://github.com/darksoul96');
+  _launchURL(urlString) async {
+   final Uri url = Uri.parse(urlString);
    if (!await launchUrl(url)) {
         throw Exception('Could not launch $url');
     }
