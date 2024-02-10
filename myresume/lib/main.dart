@@ -1,6 +1,9 @@
 
 
 import 'package:flutter/material.dart';
+import 'dart:convert'; // Import this to use json.decode
+import 'package:flutter/services.dart'; // Import this to access rootBundle
+import 'package:url_launcher/url_launcher.dart';
 
 
 void main() {
@@ -14,18 +17,137 @@ class MyWidget extends StatefulWidget {
   State<MyWidget> createState() => _MyWidgetState();
 }
 
+
+
 class _MyWidgetState extends State<MyWidget> {
+
+  List<dynamic> _jsonData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _readJsonData();
+  }
+
+  Future<void> _readJsonData() async {
+    try {
+      String jsonString = await rootBundle.loadString('assets/data.json');
+      List<dynamic> jsonData = json.decode(jsonString);
+      setState(() {
+        _jsonData = jsonData;
+      });
+    } catch (e) {
+      print("Error reading JSON file: $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 40, 37, 34),
           iconTheme: const IconThemeData(color: Colors.white),
-          title: const Text('Welcome to my resume'),
+          title: const Center(child: Text('Welcome to my resume')),
           titleTextStyle: const TextStyle(color: Colors.white),
+          actions: const [
+            Icon(Icons.help)
+          ],
         ),
+
+        // body: ListView.builder(
+        //   itemCount: _jsonData.length,
+        //   itemBuilder: (context, index) {
+        //     return ListTile(
+        //       title: Text(_jsonData[index]['title']),
+        //       subtitle: Text(_jsonData[index]['description']),
+        //     );
+        //   },
+        // ),
+
+      body: ListView(
+        children: [
+          SingleChildScrollView(
+            child: ListBody(
+              children: [
+                SizedBox(
+                  child: Column(
+                    children: [
+                      Card(
+                        child:  ListTile(
+                          title: _jsonData.isNotEmpty ? Text(_jsonData[0]['title']) : const Text('Loading...'),
+                          //subtitle: _jsonData.isNotEmpty ? Text(_jsonData[0]['description']) : const Text('Loading...'),
+                        )
+                      ),
+                      
+                    ],
+                  )
+                ),
+
+                SizedBox(
+                  child: Column(
+                    children: [
+                      Card(
+                        child:  ListTile(
+                          title: _jsonData.isNotEmpty ? Text(_jsonData[1]['title']) : const Text('Loading...'),
+                          //subtitle: _jsonData.isNotEmpty ? Text(_jsonData[0]['description']) : const Text('Loading...'),
+                        )
+                      ),
+                      
+                    ],
+                  )
+                ),
+
+                SizedBox(
+                  child: Column(
+                    children: [
+                      Card(
+                        child:  ListTile(
+                          title: _jsonData.isNotEmpty ? Text(_jsonData[2]['title']) : const Text('Loading...'),
+                          //subtitle: _jsonData.isNotEmpty ? Text(_jsonData[0]['description']) : const Text('Loading...'),
+                        )
+                      ),
+                      
+                    ],
+                  )
+                ),
+
+                SizedBox(
+                  child: Column(
+                    children: [
+                      Card(
+                        child:  ListTile(
+                          title: _jsonData.isNotEmpty ? Text(_jsonData[3]['title']) : const Text('Loading...'),
+                          //subtitle: _jsonData.isNotEmpty ? Text(_jsonData[0]['description']) : const Text('Loading...'),
+                        )
+                      ),
+                      
+                    ],
+                  )
+                ),
+
+                SizedBox(
+                  child: Column(
+                    children: [
+                      Card(
+                        child:  ListTile(
+                          title: _jsonData.isNotEmpty ? Text(_jsonData[4]['title']) : const Text('Loading...'),
+                          //subtitle: _jsonData.isNotEmpty ? Text(_jsonData[0]['description']) : const Text('Loading...'),
+                        )
+                      ),
+                      
+                    ],
+                  )
+                )
+
+
+              ],
+            ),
+          ),
+        ]
+        
+      ),
+
         drawer: Drawer(
           backgroundColor: const Color.fromARGB(255, 40, 37, 34),
           child: ListView(
@@ -127,13 +249,41 @@ class _MyWidgetState extends State<MyWidget> {
                               child: Padding(
                                 padding: EdgeInsets.only(left: 10,),
                                 child: Icon(
-                                  Icons.location_city,
+                                  Icons.location_pin,
                                   color: Colors.white,
                                   size: 16,
                                 ),
                               ),
                             )
                           ]
+                        ),
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15,),
+                      child: GestureDetector(
+                        onTap: () {
+                          _launchURL();
+                        },
+                        child: RichText(
+                          text: const TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Github',
+                              ),
+                              WidgetSpan(
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 10,),
+                                  child: Icon(
+                                    Icons.code,
+                                    color: Colors.white,
+                                    size: 16,
+                                  ),
+                                ),
+                              )
+                            ]
+                          ),
                         ),
                       ),
                     ),
@@ -148,4 +298,11 @@ class _MyWidgetState extends State<MyWidget> {
       ),
     );
   }
+
+  _launchURL() async {
+   final Uri url = Uri.parse('https://github.com/darksoul96');
+   if (!await launchUrl(url)) {
+        throw Exception('Could not launch $url');
+    }
+}
 }

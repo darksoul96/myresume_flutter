@@ -1,0 +1,42 @@
+[
+    {
+      "title": "Professional Summary",
+      "description": "I am a software developer with 2 years of experience in a remote work environment. I have been programming since high school and am currently completing my final year of Informatics Engineering (Computer Science). In terms of my skills, I have worked with technologies such as Spring in combination with Thymeleaf, Hibernate, and Angular. Additionally, I have experience in utilizing Datatables with Javascript."
+    },
+    {
+      "title": "Employment History",
+      "jobs": [
+        {
+          "job_title": "Fullstack Developer | Anden Solutions | Remote",
+          "year": "2022-2024",
+          "description": "In my most recent role, I undertook a significant project involving a complete UI overhaul of the MyCareReports application, which is owned by the Cancer Support Community. I implemented various changes in user authentication, report generation, and addressed bugs, all while prioritizing the preservation of sensitive user data."
+        },
+
+        {
+          "job_title": "Engineering Tutor | Self Employed | Mar del Plata",
+          "year": "2015-2017",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "title": "Education",
+      "year": "",
+      "description": "Informatics Engineering | Universidad Nacional de Mar del Plata | Mar del Plata"
+    },
+
+    {
+      "title": "Technologies",
+      "tech": [
+        "Spring Boot", "Flutter", "Bootstrap", "Thymeleaf", "Hibernate", "Angular", "MySQL", "HTML, Javascript, CSS"
+      ]
+    },
+
+    {
+      "title": "Skills",
+      "list": [
+        "Fast Learner", "Critical thinking and problem solving", "Adaptability", "Ability to work in a team", "Effective Time Managment"
+      ]
+    }
+  ]
+  
