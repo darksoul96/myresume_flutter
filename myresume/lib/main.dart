@@ -6,6 +6,10 @@ import 'package:flutter/services.dart'; // Import this to access rootBundle
 import 'package:myresume/employment_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'about_page.dart';
+import 'education_page.dart';
+import 'technologies_page.dart';
+import 'skills_page.dart';
+import 'languages_page.dart';
 
 
 void main() {
@@ -70,7 +74,7 @@ class _MyWidgetState extends State<MyWidget> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AboutWidget(jsonData : _jsonData)), // Navigate to the new page
+                      MaterialPageRoute(builder: (context) => AboutWidget(jsonData : _jsonData)), 
                     );
                   },
                   child: SizedBox(
@@ -91,7 +95,7 @@ class _MyWidgetState extends State<MyWidget> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => EmploymentWidget(jsonData : _jsonData)), // Navigate to the new page
+                      MaterialPageRoute(builder: (context) => EmploymentWidget(jsonData : _jsonData)),
                     );
                   },
                   child: SizedBox(
@@ -100,7 +104,6 @@ class _MyWidgetState extends State<MyWidget> {
                         Card(
                           child:  ListTile(
                             title: _jsonData.isNotEmpty ? Text(_jsonData[1]['title']) : const Text('Loading...'),
-                            //subtitle: _jsonData.isNotEmpty ? Text(_jsonData[0]['description']) : const Text('Loading...'),
                           )
                         ),
                         
@@ -109,46 +112,80 @@ class _MyWidgetState extends State<MyWidget> {
                   ),
                 ),
 
-                SizedBox(
-                  child: Column(
-                    children: [
-                      Card(
-                        child:  ListTile(
-                          title: _jsonData.isNotEmpty ? Text(_jsonData[2]['title']) : const Text('Loading...'),
-                          //subtitle: _jsonData.isNotEmpty ? Text(_jsonData[0]['description']) : const Text('Loading...'),
-                        )
-                      ),
-                      
-                    ],
-                  )
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => EducationWidget(jsonData: _jsonData))
+                    );
+                  },
+                  child: SizedBox(
+                    child: Column(
+                      children: [
+                        Card(
+                          child:  ListTile(
+                            title: _jsonData.isNotEmpty ? Text(_jsonData[2]['title']) : const Text('Loading...'),
+                          )
+                        ),
+                        
+                      ],
+                    )
+                  ),
                 ),
 
-                SizedBox(
-                  child: Column(
-                    children: [
-                      Card(
-                        child:  ListTile(
-                          title: _jsonData.isNotEmpty ? Text(_jsonData[3]['title']) : const Text('Loading...'),
-                          //subtitle: _jsonData.isNotEmpty ? Text(_jsonData[0]['description']) : const Text('Loading...'),
-                        )
-                      ),
-                      
-                    ],
-                  )
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => TechnologiesWidget(jsonData: _jsonData)));
+                  },
+                  child: SizedBox(
+                    child: Column(
+                      children: [
+                        Card(
+                          child:  ListTile(
+                            title: _jsonData.isNotEmpty ? Text(_jsonData[3]['title']) : const Text('Loading...'),
+                          )
+                        ),
+                        
+                      ],
+                    )
+                  ),
                 ),
 
-                SizedBox(
-                  child: Column(
-                    children: [
-                      Card(
-                        child:  ListTile(
-                          title: _jsonData.isNotEmpty ? Text(_jsonData[4]['title']) : const Text('Loading...'),
-                          //subtitle: _jsonData.isNotEmpty ? Text(_jsonData[0]['description']) : const Text('Loading...'),
-                        )
-                      ),
-                      
-                    ],
-                  )
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SkillsWidget(jsonData: _jsonData)));
+                  },
+                  child: SizedBox(
+                    child: Column(
+                      children: [
+                        Card(
+                          child:  ListTile(
+                            title: _jsonData.isNotEmpty ? Text(_jsonData[4]['title']) : const Text('Loading...'),
+                          )
+                        ),
+                        
+                      ],
+                    )
+                  ),
+                ),
+
+
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LanguagesWidget(jsonData: _jsonData)));
+                  },
+                  child: SizedBox(
+                    child: Column(
+                      children: [
+                        Card(
+                          child:  ListTile(
+                            title: _jsonData.isNotEmpty ? Text(_jsonData[5]['title']) : const Text('Loading...'),
+                          )
+                        ),
+                        
+                      ],
+                    )
+                  ),
                 )
 
 

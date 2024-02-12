@@ -17,7 +17,7 @@ class _EmploymentWidgetState extends State<EmploymentWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Employment History'),
+        title: Text(widget.jsonData[1]['title']),
       ),
       body: widget.jsonData.isNotEmpty ? ListView.builder(
       itemCount: widget.jsonData[1]['jobs'].length,

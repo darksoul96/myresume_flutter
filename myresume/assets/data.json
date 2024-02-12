@@ -21,7 +21,7 @@
     },
     {
       "title": "Education",
-      "year": "",
+      "year": "2015-Present",
       "description": "Informatics Engineering | Universidad Nacional de Mar del Plata | Mar del Plata"
     },
 
@@ -37,6 +37,14 @@
       "list": [
         "Fast Learner", "Critical thinking and problem solving", "Adaptability", "Ability to work in a team", "Effective Time Managment"
       ]
+    },
+
+    {
+      "title": "Languages",
+      "languages": [
+        "English - Advanced", "Spanish - Native proficiency"
+      ]
     }
+
   ]
   
